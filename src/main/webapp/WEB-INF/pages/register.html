@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+<div id="reg">
+    <form action="/register" method="post">
+        <label for="reg_username">Имя пользователя:</label><br>
+        <input type="text" id="reg_username" name="reg_username"><br><br>
+
+        <label for="reg_password">Пароль:</label><br>
+        <input type="password" id="reg_password" name="reg_password"><br><br>
+
+        <label for="confirm_password">Подтверждение пароля:</label><br>
+        <input type="password" id="confirm_password" name="confirm_password"><br><br>
+
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+    <p>Уже есть аккаунт? <a href="/login">Авторизоваться</a></p>
+</div>
+</body>
+</html>

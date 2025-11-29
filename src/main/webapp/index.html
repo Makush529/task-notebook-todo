@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="login">
+    <form action="/login" method="post">
+        <label for="username">Имя пользователя:</label><br>
+        <input type="text" id="username" name="username"><br><br>
+
+        <label for="password">Пароль:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+
+        <button type="submit">Войти</button>
+    </form>
+
+    <p>Нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+</div>
+</body>
+</html>
