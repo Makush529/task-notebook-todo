@@ -6,7 +6,7 @@ public class Validator {
     private final MapRepository mapRepository ;
 
     public Validator() {
-        this.mapRepository = new MapRepository();
+        this.mapRepository = MapRepository.getInstance();
     }
 
     public boolean validateLoginPassword(String username, String password) {
