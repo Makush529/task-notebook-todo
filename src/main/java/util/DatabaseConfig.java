@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBConfig {
+public class DatabaseConfig {
     private static final String URL =  "jdbc:postgresql://localhost:5432/database_first";
     private static final String LOGIN = "user529";
     private static final String PASSWORD = "root";
