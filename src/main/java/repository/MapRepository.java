@@ -1,16 +1,19 @@
 package repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import util.DatabaseConfig;
+import util.SQLCommands;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MapRepository {
     private static MapRepository instance;
-    private static Map<String, String> userList;
+    private static Connection connection;
 
     public MapRepository() {
-        userList = new HashMap<>();
-        userList.put("admin", "admin");
-        userList.put("user", "user");
+        connection = DatabaseConfig.getConnection();
     }
 
     public static MapRepository getInstance() {
@@ -21,18 +24,40 @@ public class MapRepository {
     }
 
     public static void addUserToBase(String username, String password) {
-        userList.put(username, password);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLCommands.CREATE_USER);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Error in adding user to database");
+        }
     }
 
-    public boolean isUsernameContains(String username) {
-        return userList.containsKey(username);
-    }
-
-    public boolean isUsernameExists(String username) {
-        return userList.containsKey(username);
+    public boolean isUsernameContains(String username) {//наличие юзера в бд, для авторизации
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLCommands.GET_USER_BY_USERNAME);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.out.println("isUsernameContains ERROR");
+            throw new RuntimeException(e);
+        }
     }
 
     public boolean isValidCredentials(String username, String password) {
-        return userList.containsKey(username) && userList.get(username).equals(password);
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLCommands.GET_USER_BY_USERNAME_AND_PASSWORD);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException e) {
+            System.out.println("isValidCredentials ERROR"
+            );
+        }
+        System.out.println("разобраться в репозитории");
+        return false;
     }
 }

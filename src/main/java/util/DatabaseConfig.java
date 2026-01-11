@@ -9,6 +9,15 @@ public class DatabaseConfig {
     private static final String LOGIN = "user529";
     private static final String PASSWORD = "root";
 
+//драйвер скачивается , но прописывается вручную. без него не запускается в браузере!!!
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static Connection getConnection() {
         try {
             return DriverManager.getConnection(URL,LOGIN,PASSWORD);

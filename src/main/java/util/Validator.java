@@ -19,6 +19,6 @@ public class Validator {
                 password != null &&
                 password.length() > 3 &&
                 password.equals(confirmPassword) &&
-                !mapRepository.isUsernameExists(username);
+                !mapRepository.isUsernameContains(username);
     }
 }
