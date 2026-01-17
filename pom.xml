@@ -37,8 +37,33 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.2</version> <!-- Актуальная версия на 2026 год -->
         </dependency>
+        <!-- Flyway -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-database-postgresql</artifactId>
+            <version>11.3.0</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>untitled3</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>11.3.0</version>
+                <configuration>
+                    <url>jdbc:postgresql://localhost:5432/database_first</url>
+                    <user>user529</user>
+                    <password>root</password>
+                    <cleanDisabled>false</cleanDisabled>
+                    <baselineVersion>1.0.0</baselineVersion>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
